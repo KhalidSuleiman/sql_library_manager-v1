@@ -3,3 +3,21 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  
+    table 
+      tr 
+        th id 
+        th title 
+        th author 
+        th createdAt 
+        th updatedAt 
+      each n in books 
+        tr
+          th=  n.id 
+          th=n.title 
+          th=n.author 
+          th=n.createdAt 
+          th=n.updatedAt 
+
+
+
