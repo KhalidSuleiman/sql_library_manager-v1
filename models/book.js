@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate: {
         notNull: {
+          args: true,
           msg: '"title" can not be empty',
         },
         
@@ -29,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false,
       validate: {
         notNull: {
+          args: true,
           msg: 'Author name most be entered '
         
       },
