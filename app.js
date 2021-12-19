@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-const Book = require('./models');
+
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize({
@@ -17,13 +17,12 @@ const sequelize = new Sequelize({
   storage: 'library.db'
 });
 
+const models = require("./models");
 
-/**
- * 
 const db = require('./models');
-const { Book } = db.models;
+const Book = db.models;
 const { Op } = db.Sequelize;
-*/
+
 (async () => {
   await models.sequelize.sync();
   try {
