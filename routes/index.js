@@ -1,37 +1,62 @@
-var express = require('express');
+
+var express = require("express");
 var router = express.Router();
-const Book =require('../models').Book
+const Book = require("../models").Book;
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  Book.findAll().then(function(books){
-    res.render("index", {books: books, title: "My Library" });
-    console.log(books)
-  });
 
- /*  // Handler function to wrap each route. 
-function asyncHandler(cb){
-  return async(req, res, next) => {
+
+
+// wrapper for asynchronous handling of all routing functions 
+function asyncHandler (cb) {
+  return async (req, res, next) => {
     try {
-      await cb(req, res, next)
-    } catch(error){
-      // Forward error to the global error handler
-      next(error);
+      await cb (req, res, next);
+    } catch (err) {
+      next(err);
     }
   }
 }
-*/
-/**
- * (async () => {
-  const allBooks = await  Book.findAll();
-  res.json(allBooks);
-  console.log("Khalid")
-  console.log(res.json(allBooks))
-  //res.render(res.json())
-})
-*/
 
 
+// redirects / to books
+router.get("/", (req, res, next) => {
+  res.redirect("/books");
 });
+
+// List all available books
+router.get('/books', asyncHandler(async (req, res) => {
+  
+    const books = await Book.findAll();
+    console.log(books);
+    res.render('index', { books: books, title:"Khalid's Library"});
+  }));
+
+  //show one book and option for delete edit and go back 
+
+  router.get('/books/:id/edit', asyncHandler(async (req,res,next)=>{
+    const books = await Book.findByPk(req.params.id);
+    console.log(books);
+    res.render('update', { books});
+  }))
+
+  router.post('/books/:id/edit', asyncHandler(async (req, res) => {
+    let book;
+   
+      book = await Book.findByPk(req.params.id);
+      if (book) {
+        await book.update(req.body);
+        res.redirect("/books");
+      } else {
+        res.sendStatus(404);
+      }
+    
+      
+  }));
+
+  router.get('/books/:id', asyncHandler(async (req,res,next)=>{
+    let books;
+    books = await Book.findByPk(req.params.id);
+    res.render('show', {books});
+  }))
 
 module.exports = router;

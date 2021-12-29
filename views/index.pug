@@ -2,22 +2,28 @@ extends layout
 
 block content
   h1= title
+  a.
   p Welcome to #{title}
   
     table 
       tr 
-        th id 
-        th title 
-        th author 
+        th ID 
+        th TITLE
+        th AUTHOR
+        th GENRE
+        th YEAR ISSUED 
+        
         th createdAt 
         th updatedAt 
       each n in books 
         tr
-          th=  n.id 
-          th=n.title 
-          th=n.author 
-          th=n.createdAt 
-          th=n.updatedAt 
+          td= n.id 
+          td=n.title 
+          td=n.author 
+          td=n.genre
+          td=n.year 
+          td=n.createdAt 
+          td=n.updatedAt 
 
 
 
