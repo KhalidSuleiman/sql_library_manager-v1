@@ -4,9 +4,9 @@ body {
 }
 
 a {
-  color: #adb2fa;
+  color: #0d1df3;
   text-decoration: none;
-  
+  font-size: small;
   transition: 0.4s;
 }
 
@@ -54,21 +54,22 @@ h2 {
 }
 
 th {
-  border-bottom: 2px solid #D8B493;
+  border-bottom: 2px solid #8c77e9;
   text-align: left;
   padding: 5px 20px 5px 10px;
 }
 
 tr {
   min-height: 50px;
+  
 }
 
-tr:nth-child(2n) {
-  background: #E7E7E7;
-}
+
 
 td {
   padding: 5px 20px 5px 10px;
+  font-size:smaller;
+  border-bottom: 2px solid #8c77e9;
 }
 
 label {
@@ -94,4 +95,20 @@ input[type=text] {
 
 .error {
   color: rgb(236, 15, 15);
+}
+
+.btn {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+.btn:hover{
+  
+   background-color: #AAAAAA;
 }

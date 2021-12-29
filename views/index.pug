@@ -12,18 +12,22 @@ block content
         th AUTHOR
         th GENRE
         th YEAR ISSUED 
-        
+
         th createdAt 
         th updatedAt 
+        th
+        
       each n in books 
         tr
-          td= n.id 
+          td= n.id  
           td=n.title 
           td=n.author 
           td=n.genre
           td=n.year 
           td=n.createdAt 
           td=n.updatedAt 
+          td 
+            a.btn(href='/books/'+n.id) Action 
 
 
 

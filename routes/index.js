@@ -39,12 +39,13 @@ router.get('/books', asyncHandler(async (req, res) => {
     res.render('update', { books});
   }))
 
-  router.post('/books/:id/edit', asyncHandler(async (req, res) => {
+  router.post('/books/:id/update', asyncHandler(async (req, res) => {
     let book;
    
       book = await Book.findByPk(req.params.id);
       if (book) {
         await book.update(req.body);
+        console.log(req.body)
         res.redirect("/books");
       } else {
         res.sendStatus(404);
@@ -59,4 +60,15 @@ router.get('/books', asyncHandler(async (req, res) => {
     res.render('show', {books});
   }))
 
+  router.get('/books/:id/delete', asyncHandler(async (req,res,next)=>{
+    let book; 
+    book = await Book.findByPk(req.params.id);
+    console.log(book.title)
+    if (book) {
+      await book.destroy();
+      res.redirect("/");
+    } else {
+      res.sendStatus(404);
+    }
+  }))
 module.exports = router;
