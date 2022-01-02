@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    h1=title
+
+        if(error) 
+            h2.errors  Error occurred
+            ul.errors
+                each err in error
+                    li.err
+                        =err.message
+    
+   
+
+                form(action="/new", method="post")
+                    p
+                        label(for='title' ) Title
+                        input#title(name='title' type='text' value=books.title )
+                    p
+                        label(for='author') Author
+                        input#author(name='author' type='text' value=books.author)
+                    p
+                        label(for='genre') Genre
+                        input#genre(name='genre' type='text' value=books.genre)
+                    p
+                        label(for='year') Year
+                        input#year(name='year' type='text' value=books.year)
+                        
+                    input(type='submit' value='Create' )
+                
+                    a.button(href='../') Cancel
+        else 
+            form(action="/new", method="post")
+                p
+                    label(for='title' ) Title
+                    input#title(name='title' type='text' )
+                p
+                    label(for='author') Author
+                    input#author(name='author' type='text' )
+                p
+                    label(for='genre') Genre
+                    input#genre(name='genre' type='text' )
+                p
+                    label(for='year') Year
+                    input#year(name='year' type='text' )
+                        
+                input(type='submit' value='Create' )
+                
+                a.button(href='../') Cancel
+            

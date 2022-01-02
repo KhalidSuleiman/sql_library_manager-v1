@@ -6,13 +6,13 @@ body {
 a {
   color: #0d1df3;
   text-decoration: none;
-  font-size: small;
+  font-size: large;
   transition: 0.4s;
 }
 
-  a:hover {
-    color: rgb(235, 14, 14);
-  }
+a:hover {
+  color: rgb(235, 14, 14);
+}
 
 a.button, input[type=submit] {
   color: white;
@@ -40,7 +40,9 @@ input[type=submit] {
 p {
   margin: 20px auto;
 }
-
+h1 {
+  align-items: center;
+}
 ul {
   padding: 0;
   list-style-type: none;
@@ -69,7 +71,7 @@ tr {
 td {
   padding: 5px 20px 5px 10px;
   font-size:smaller;
-  border-bottom: 2px solid #8c77e9;
+  
 }
 
 label {
@@ -93,7 +95,7 @@ input[type=text] {
   width: 300px;
 }
 
-.error {
+h2.errors {
   color: rgb(236, 15, 15);
 }
 
@@ -105,10 +107,28 @@ input[type=text] {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 10px;
+  font-size: 20px;
+  align-items: right;
 }
 
 .btn:hover{
   
    background-color: #AAAAAA;
 }
+tr:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
+
+th:nth-child(even),td:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
+
+.mainbox {
+  background-color: #ffffff;
+  margin: auto;
+  height: 600px;
+  width: 600px;
+  position: relative;
+}
+
+
