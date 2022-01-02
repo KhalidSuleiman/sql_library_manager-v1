@@ -3,7 +3,7 @@ var express = require("express");
 var router = express.Router();
 const Book = require("../models").Book;
 
-var app = express();
+
 
 
 
@@ -27,10 +27,10 @@ router.get("/", asyncHandler((req, res, next) => {
 // List all available books
 router.get('/books', asyncHandler(async (req, res, next) => {
   try{
-  const books = await Book.findAll();
-  const bookCount=books.length;
-  console.log(books.length);
-  res.render('index', { books: books, title:"Khalid's Library", bookCount:bookCount});
+    const books = await Book.findAll();
+    const bookCount=books.length;
+    console.log(books.length);
+    res.render('index', { books: books, title:"Khalid's Library", bookCount:bookCount});
   }catch(error){
     next(error);
   }
@@ -38,7 +38,17 @@ router.get('/books', asyncHandler(async (req, res, next) => {
   }) 
 
 );
-
+//retrieve individual book
+router.get('/books/:id', asyncHandler(async (req,res,next)=>{
+  let books;
+  error = new Error('Book Not Found')
+  books = await Book.findByPk(req.params.id);
+  if (books){
+    res.render('show', {books});
+  }else {
+    res.sendStatus(500).render('error',{error})
+  } 
+}))
   //show one book and option for delete edit and go back 
 
 router.get('/books/:id/edit', asyncHandler(async (req,res,next)=>{
@@ -62,14 +72,6 @@ router.post('/books/:id/update', asyncHandler(async (req, res) => {
       
 }));
 
-router.get('/books/:id', asyncHandler(async (req,res,next)=>{
-  let books;
-  error = new Error('Book Not Found')
-  books = await Book.findByPk(req.params.id);
-  if (books){
-    res.render('show', {books});
-  }else res.sendStatus(500).render('error',{error})
-}))
 
 router.get('/books/:id/delete', asyncHandler(async (req,res,next)=>{
   let book; 
@@ -108,5 +110,6 @@ router.post('/new', asyncHandler(async(req, res, next)=> {
   }
     
 }));
+
 
 module.exports = router;
