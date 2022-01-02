@@ -12,7 +12,7 @@ block content
     
    
 
-                form(action="/new", method="post")
+                form(action="/books/new", method="post")
                     p
                         label(for='title' ) Title
                         input#title(name='title' type='text' value=books.title )
@@ -30,7 +30,7 @@ block content
                 
                     a.button(href='../') Cancel
         else 
-            form(action="/new", method="post")
+            form(action="/books/new", method="post")
                 p
                     label(for='title' ) Title
                     input#title(name='title' type='text' )

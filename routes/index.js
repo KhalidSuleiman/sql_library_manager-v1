@@ -39,7 +39,7 @@ router.get('/books', asyncHandler(async (req, res, next) => {
 
 );
 //retrieve individual book
-router.get('/books/:id', asyncHandler(async (req,res,next)=>{
+router.get('/books/book/:id', asyncHandler(async (req,res,next)=>{
   let books;
   error = new Error('Book Not Found')
   error.status = 500;
@@ -52,13 +52,13 @@ router.get('/books/:id', asyncHandler(async (req,res,next)=>{
 }))
   //show one book and option for delete edit and go back 
 
-router.get('/books/:id/edit', asyncHandler(async (req,res,next)=>{
+router.get('/books/edit/:id', asyncHandler(async (req,res,next)=>{
     const books = await Book.findByPk(req.params.id);
     
     res.render('update', { books});
 }))
 
-router.post('/books/:id/update', asyncHandler(async (req, res) => {
+router.post('/books/update/:id', asyncHandler(async (req, res) => {
     let book;
    
       book = await Book.findByPk(req.params.id);
@@ -74,7 +74,7 @@ router.post('/books/:id/update', asyncHandler(async (req, res) => {
 }));
 
 
-router.get('/books/:id/delete', asyncHandler(async (req,res,next)=>{
+router.get('/books/delete/:id', asyncHandler(async (req,res,next)=>{
   let book; 
   book = await Book.findByPk(req.params.id);
   
@@ -87,12 +87,12 @@ router.get('/books/:id/delete', asyncHandler(async (req,res,next)=>{
   }
 }))
 
-router.get('/new', asyncHandler((req, res, next) => {
-  res.render("newBook",  {title: "Add New Book To Library"});
+router.get('/books/new', asyncHandler((req, res, next) => {
+  res.render("newBook",  {title: "Add a New Book To Library"});
 }));
 
  
-router.post('/new', asyncHandler(async(req, res, next)=> {
+router.post('/books/new', asyncHandler(async(req, res, next)=> {
   let book; 
   try{
     book = await Book.create(req.body);
@@ -104,10 +104,8 @@ router.post('/new', asyncHandler(async(req, res, next)=> {
           
       book = req.body;
           
-        res.render("newBook", {books:book, error: error.errors, title: "Add New Book To Library"});
-    } else {
-      next(error) //throw error;
-    }
+        await res.render("newBook", {books:book, error: error.errors, title: "Add New Book To Library"});
+    } 
   }
     
 }));
