@@ -30,7 +30,7 @@ router.get('/books', asyncHandler(async (req, res, next) => {
     const books = await Book.findAll();
     const bookCount=books.length;
     console.log(books.length);
-    res.render('index', { books: books, title:"Khalid's Library", bookCount:bookCount});
+    return res.render('index', { books: books, title:"Khalid's Library", bookCount:bookCount});
   }catch(error){
     next(error);
   }
@@ -42,11 +42,12 @@ router.get('/books', asyncHandler(async (req, res, next) => {
 router.get('/books/:id', asyncHandler(async (req,res,next)=>{
   let books;
   error = new Error('Book Not Found')
+  error.status = 500;
   books = await Book.findByPk(req.params.id);
   if (books){
     res.render('show', {books});
   }else {
-    res.sendStatus(500).render('error',{error})
+    next(error)
   } 
 }))
   //show one book and option for delete edit and go back 

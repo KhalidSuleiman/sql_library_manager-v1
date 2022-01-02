@@ -58,14 +58,16 @@ app.use((req, res, next) => {
 app.use((err, req,res,next) => {
   if(err){
     console.log('Global error Handler called');
+    console.log(err.message);
+    console.log(err.status)
   }
   
   if(err.status === 404){
-    res.status(404).render('page-not-found',{err});
-  }else {
-    err.message = err.message || 'Oops! It looks like something went wrong on the server.';
-    res.status(err.status || 500).render('error',{err});
+    return res.status(404).render('page-not-found',{err});
   }
+  err.message = err.message || 'Oops! It looks like something went wrong on the server.';
+  res.status(err.status || 500).render('error',{err});
+  
 })
 
 
