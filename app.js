@@ -23,6 +23,7 @@ const db = require('./models');
 const Book = db.models;
 const { Op } = db.Sequelize;
 
+// first to run to check the availability of database 
 (async () => {
   await models.sequelize.sync();
   try {
@@ -46,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-
+// 404 error catcher 
 app.use((req, res, next) => {
   const err = new Error('Sorry.. The page you\'re looking for can\'t be found');
   err.status = 404;
@@ -55,6 +56,7 @@ app.use((req, res, next) => {
   next(err);
 });
 
+// global error handler 
 app.use((err, req,res,next) => {
   if(err){
     console.log('Global error Handler called');

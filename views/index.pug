@@ -5,7 +5,7 @@ block content
   a.
   p Welcome to #{title} Total : #{bookCount} Books
     p
-    a.btn(href='/books/new', class="new-book") Add a Book
+    a.btn(href='/books/new') Add a Book
   
     table 
       tr 
@@ -23,7 +23,7 @@ block content
           td= n.id  
             
           td
-            a(href="/books/book/" + n.id )  #{n.title} 
+            a(href="/books/" + n.id method='GET')  #{n.title} 
           td=n.author 
           td=n.genre
           td=n.year 
