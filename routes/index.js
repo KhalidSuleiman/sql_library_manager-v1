@@ -76,11 +76,6 @@ router.post('/books/new',
     
 }));
 
- 
-
-
-
-
   //show one book and option for delete edit and go back 
 
 router.get('/books/:id/update', 
