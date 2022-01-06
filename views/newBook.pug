@@ -4,11 +4,13 @@ block content
     h1=title
 
         if(error) 
-            h2.errors  Error occurred
+            console.log(error)
+            h2.errors  Sorry... Some Thing Missing 
             ul.errors
                 each err in error
                     li.err
                         =err.message
+                
 
                 form(action="/books/new", method="post")
                     p

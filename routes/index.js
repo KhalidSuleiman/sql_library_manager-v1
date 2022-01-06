@@ -44,8 +44,7 @@ router.get('/books',
 // create new book 
 router.get('/books/new', 
   asyncHandler((req, res, next) => {
-
-  error =null; 
+  
   res.render("newBook",  {title: "Add a New  Book To Library"});
 }));
 
@@ -62,15 +61,16 @@ router.post('/books/new',
   try{
     
     books = await Book.create(req.body);
+    
     res.redirect("/" );
 
   }catch(error){
-     console("error catch ")   
+        
     if (error.name === "SequelizeValidationError") {
-          
+         
       books = req.body;
           
-        await res.render("newBook", {books:books, error: error.errors, title: "Add New Book To Library"});
+      await res.render("newBook", {books:books, error: error.errors, title: "Add New Book To Library"});
     } 
   }
     
@@ -124,13 +124,14 @@ router.get('/books/:id/delete', asyncHandler(async (req,res,next)=>{
 // retrieve individual selected book 
 router.get('/books/:id', asyncHandler(async (req,res,next)=>{
   let books;
-  error = new Error('Book Not Found')
-  error.status = 500;
+ 
   books = await Book.findByPk(req.params.id);
   if (books){
-    console.log(books);
+    
     res.render('show', {books});
-  }else {
+  }else { 
+    error = new Error('Book Not Found')
+    error.status = 500;
     next(error)
   } 
 }))
